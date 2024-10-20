@@ -4,7 +4,7 @@ Website where you can read and create your own blogs posts.
 
 ## Overview
 
-With this blog site you can read, write, edit and comment blog posts. It is for people who want to share their ideas and interests. At the moment application is up and running but the layout is still a bit poor so it needs styling.
+With this blog site you can read, write, edit and comment blog posts. It is for people who want to share their ideas and interests. At the moment application is up and running. test_schema.sql categories are a bit silly, for example under clothing you get avokado recipe. But it gets you up and running.
 
 ## Features
 
@@ -18,13 +18,13 @@ With this blog site you can read, write, edit and comment blog posts. It is for 
 
 - Python
 - Postgresql
-
+- Javascript
 
 ## Getting Started
 
 Important!
 
-Schema.sql alters tablenames users, posts, comments, tags and post_tag if it exists. After that it will create new tables under respective names.
+Schema.sql alters tablenames users, posts, comments, tags and post_tag if it exists. After that it will create new tables under respective names. If you get conflicts with database you might need to drop your postgresql tables before you can run this app.
 
 1. Clone repository to your computer
 
