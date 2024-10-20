@@ -10,7 +10,9 @@
 
   {% if session['user_id'] %} <!--only user logged in can create post-->
 
+  <!--
   <h2>Create a new post</h2>
+  
 
     <form method="POST" action="{{ url_for('create_post') }}">
       <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
@@ -41,6 +43,74 @@
 
       <button type="submit">Create Post</button>
     </form>
+  -->
+
+
+
+<!-- Label as a button to show/hide the form -->
+<label id="showFormButton" style="padding: 10px 20px; border: none; background-color: #007bff; color: white; cursor: pointer;">
+  Create New Post
+</label>
+
+<!-- Form container that is hidden by default -->
+<div id="postForm" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #ccc; border-radius: 5px;">
+  <form method="POST" action="{{ url_for('create_post') }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+    <label for="title">Title:</label>
+    <br>
+    <input type="text" name="title" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+    <br><br>
+
+    <label for="content">Content:</label>
+    <br>
+    <textarea name="content" required style="width: 100%; height: 100px; border: 1px solid #ccc; padding: 10px; border-radius: 5px;"></textarea>
+    <br><br>
+
+    <label for="category">Category:</label>
+    <br>
+    <select name="category_id" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+        {% for category in categories %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+        {% endfor %}
+    </select>
+    <br><br>
+
+    <label for="tags">Tags (comma-separated):</label>
+    <br>
+    <input type="text" name="tags" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
+    <br><br>
+
+    <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer;">
+      Create Post
+    </button>
+  </form>
+</div>
+
+<!-- CSS to control the form display -->
+<style>
+  #showFormButton {
+    display: inline-block;
+    margin-bottom: 20px;
+  }
+
+  /* Show form when the button is clicked */
+  #showFormButton.active + #postForm {
+    display: block;
+  }
+</style>
+
+<!-- Script to toggle the visibility of the form -->
+<script>
+  const button = document.getElementById('showFormButton');
+  const form = document.getElementById('postForm');
+
+  button.addEventListener('click', function() {
+    form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
+    button.textContent = form.style.display === 'block' ? 'Hide Form' : 'Create New Post';
+  });
+</script>
+
   {% endif %}
 
   <!-- Show posts on landing page -->

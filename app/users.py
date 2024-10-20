@@ -5,7 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
 import logging
 from functools import wraps
-from flask import redirect, session, url_for
+from flask import redirect, session, url_for, flash
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
@@ -24,6 +24,14 @@ def add_user(name, password):
 
 
 def login(name, password):
+        # Check if the username or password is empty
+    if not name.strip():
+        flash("Username cannot be empty")
+        return False
+    if not password.strip():
+        flash("Password cannot be empty")
+        return False
+    
     sql = text("SELECT password, id FROM users WHERE name=:name")
     result = db.session.execute(sql, {"name": name})
     user = result.fetchone()

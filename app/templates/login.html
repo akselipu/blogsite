@@ -1,18 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<h2>Kirjaudu sisään</h2>
+<h2>Login</h2>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li style="color: red;">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endwith %}
 
 <form action="/login" method="post">
-Tunnus: <br><input type="text" name="username">
+Username: <br><input type="text" name="username">
 <p>
-Salasana: <br><input type="password" name="password">
+Password: <br><input type="password" name="password">
 <p>
-<input type="submit" value="Kirjaudu">
+<input type="submit" value="Login">
 </form>
-Jos sinulla ei ole tunnusta, voit luoda uuden tunnuksen <a href="/register">tästä</a>
+If you dont have an account you can create new one <a href="/register">here</a>
 
 <p>
-<a href="/">Palaa takaisin</a>
+<a href="/">Go Back</a>
 
 {% endblock %}
